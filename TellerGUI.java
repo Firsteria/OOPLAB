@@ -30,6 +30,7 @@ public class TellerGUI {
     p2.add(l2); p2.add(txt2);
     p3.add(bn1); p3.add(bn2); p3.add(bn3);
     p.add(p1); p.add(p2); p.add(p3); p.add(p4); fr.add(p);
+    txt1.setEditable(false);
     
     fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     fr.pack();
