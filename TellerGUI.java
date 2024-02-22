@@ -1,11 +1,14 @@
+
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
-public class TellerGUI {
+public class TellerGUI implements ActionListener{
     private JFrame fr;
     private JPanel p, p1, p2, p3, p4;
     private JTextField txt1, txt2;
     private JLabel l1, l2;
     private JButton bn1, bn2, bn3;
+    private Account acc;
     
     public TellerGUI(){
     fr = new JFrame();
@@ -16,11 +19,16 @@ public class TellerGUI {
     p4 = new JPanel();
     l1 = new JLabel("Balance");
     l2 = new JLabel("Amount");
-    txt1 = new JTextField("6000", 10);
+    txt1 = new JTextField("0.0");
     txt2 = new JTextField();
     bn1 = new JButton("Deposit");
     bn2 = new JButton("Withdraw");
     bn3 = new JButton("Exit");
+    acc = new Account();
+    
+    bn1.addActionListener(this);
+    bn2.addActionListener(this);
+    bn3.addActionListener(this);
     
     p.setLayout(new GridLayout(4, 1));
     p1.setLayout(new GridLayout(1,2));
@@ -36,4 +44,31 @@ public class TellerGUI {
     fr.pack();
     fr.setVisible(true);
     }
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        Object source = ev.getSource();
+        if (source instanceof JButton){
+            JButton clickedButton = (JButton) source;
+            String buttonText = clickedButton.getText();
+            switch(buttonText){
+                case "Deposit":
+                    double dp = Double.parseDouble(txt2.getText());
+                    acc.deposit(dp);
+                    txt1.setText(""+acc.getBalance());
+                    break;
+                case "Withdraw":
+                    double wd = Double.parseDouble(txt2.getText());
+                    acc.withdraw(wd);
+                    txt1.setText(""+acc.getBalance());
+                    break;
+                case "Exit":
+                    System.exit(0);
+                    break;
+            }
+        }
+    }
 }
+        
+        
+        
+
